@@ -9,6 +9,6 @@ dependencies{
 }
 
 task execute(type:JavaExec, dependsOn: 'classes'){
-  main = 'SimpleTest'
+  main = 'CSVDemo'
   classpath = sourceSets.main.runtimeClasspath
 }
