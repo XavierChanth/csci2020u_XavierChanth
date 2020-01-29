@@ -13,3 +13,28 @@ task execute(type:JavaExec, dependsOn: 'classes'){
   classpath = sourceSets.main.runtimeClasspath
 }
 
+gradle
+sourceCompatibility = 1.8
+version = '1.0'
+jar {
+  manifest {
+    attributes 'Main-Class': 'gradleDemo.demo',
+          'Implementation-Title': 'Gradle-Demo',
+          'Implementation-Version': version
+  }
+}
+
+buildscript {
+  repositories {
+    flatDir dirs: 'proguard6.2.2/lib'
+  }
+  dependencies {
+    classpath ':proguard'
+  }
+}
+
+task minify(dependsOn: 'jar', type: proguard.gradle.ProGuardTask) {
+  configuration 'proguard.cfg'
+  injars 'build/libs/lab03.jar'
+  outjars 'build/libs/lab03.min.jar'
+}
